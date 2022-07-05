@@ -1,0 +1,4 @@
+{
+  "*.js": "npm run eslint",
+  "*.scss": "npm run style"
+}
