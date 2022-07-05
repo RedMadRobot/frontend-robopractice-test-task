@@ -1,0 +1,14 @@
+# ignore vendor
+node_modules/
+
+# ignore build
+build/
+
+# server part
+server/
+
+# svgo postcss babel
+*.config.js
+
+# config webpack
+webpack.*.js

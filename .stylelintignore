@@ -1,0 +1,8 @@
+# ignore vendor
+node_modules/
+
+# ignore build
+build/
+
+# ignore source files
+src/css/*.min.css
