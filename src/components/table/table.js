@@ -16,7 +16,6 @@ import Paper from '@mui/material/Paper';
 
 import { visuallyHidden } from '@mui/utils';
 
-
 function createData(fullname, calories, fat, carbs, protein) {
   return {
     fullname,
@@ -355,7 +354,6 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -370,7 +368,7 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? 'right' : 'left'}
             padding={'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
-            className={headCell.id === 'fullname' ? 'sticky--item': ''}
+            className={'table-head-item sticky-item'}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -425,14 +423,12 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 600, maxWidth: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        <TableContainer sx={{ maxHeight: 480}}>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            stickyHeader
-            aria-label="sticky table"
-            className='table-root'
+            aria-label="simple table"
           >
             <EnhancedTableHead
               order={order}
@@ -449,53 +445,148 @@ export default function EnhancedTable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.fullname}>
-                      <TableCell component="th" id={labelId} scope="row" className="sticky-item">
+                    <TableRow tabIndex={-1} key={row.fullname} className="table-body-row">
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        className="sticky-item"
+                      >
                         {row.fullname}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right" className="sticky-item" style={{right:0}}>{row.protein}</TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.calories}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.fat}
+                      </TableCell>
+                      <TableCell align="right" className="table-body-item">
+                        {row.carbs}
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        className="sticky-item"
+                        style={{ right: 0 }}
+                      >
+                        {row.protein}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
