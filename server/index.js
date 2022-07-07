@@ -5,7 +5,7 @@ const port = 8080;
 
 app.use(
   cors({
-    'Access-Control-Allow-Origin': [
+    origin: [
       'http://localhost', // prod workflow (port: 80)
       'http://localhost:3000', // dev workflow
     ],
