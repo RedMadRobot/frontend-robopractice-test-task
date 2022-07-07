@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -11,10 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import TextField from '@mui/material/TextField';
 
 import Paper from '@mui/material/Paper';
-
 import { visuallyHidden } from '@mui/utils';
+import { Container } from '@mui/system';
 
 function createData(fullname, calories, fat, carbs, protein) {
   return {
@@ -40,20 +41,6 @@ const rows = [
   createData('Marshmallow', 318, 0, 81, 2.0),
   createData('Nougat', 360, 19.0, 9, 37.0),
   createData('Oreo', 437, 18.0, 63, 4.0),
-  createData('Ice cream', 237, 9.0, 37, 4.3),
-  createData('Jelly Bom', 375, 0.0, 94, 0.0),
-  createData('KitKata', 518, 26.0, 65, 7.0),
-  createData('Lollipops', 392, 0.2, 98, 0.0),
-  createData('Marshmallows', 318, 0, 81, 2.0),
-  createData('Nougat Ini', 360, 19.0, 9, 37.0),
-  createData('Oreo lat', 437, 18.0, 63, 4.0),
-  createData('Ice cream soda', 237, 9.0, 37, 4.3),
-  createData('Jelly Bomb', 375, 0.0, 94, 0.0),
-  createData('KitKatas', 518, 26.0, 65, 7.0),
-  createData('Lollipops', 392, 0.2, 98, 0.0),
-  createData('Marshmallows ini', 318, 0, 81, 2.0),
-  createData('Nougat Ini', 360, 19.0, 9, 37.0),
-  createData('Oreo latina', 437, 18.0, 63, 4.0),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -112,240 +99,6 @@ const headCells = [
     label: 'Carbs (g)',
   },
   {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
     id: 'protein',
     numeric: true,
     disablePadding: false,
@@ -368,7 +121,7 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? 'right' : 'left'}
             padding={'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
-            className={'table-head-item sticky-item'}
+            className={'table-head-item sticky-item table-cell'}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -396,7 +149,33 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+const requestSearch = (event) => {
+  const val =
+    event.target.value === '' ? 'give default array' : 'show filtered array';
+  console.log(val);
+};
+
 export default function EnhancedTable() {
+  useEffect(() => {
+    async function fetchData(url, options) {
+      const response = await fetch(url, options);
+      const data = await response.json();
+
+      return data;
+    }
+
+    if (window) {
+      const data = fetchData('http://localhost:8080/api/users', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log(JSON.stringify(data));
+    }
+  }, []);
+
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [page, setPage] = React.useState(0);
@@ -423,185 +202,96 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableContainer sx={{ maxHeight: 480}}>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            aria-label="simple table"
-          >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
+      <Paper sx={{ width: '100%', mb: 2 }} className="paper-box">
+        <Container maxWidth="false" className="container-inner search-box">
+          <TextField
+            id="standard-search"
+            label="Search field"
+            type="search"
+            variant="standard"
+            className="search-bar"
+            fullWidth
+            onChange={(searchVal) => requestSearch(searchVal)}
+          />
+        </Container>
 
-                  return (
-                    <TableRow tabIndex={-1} key={row.fullname} className="table-body-row">
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        className="sticky-item"
+        <Container maxWidth="false" className="container-inner">
+          <TableContainer sx={{ maxHeight: 480 }}>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              aria-label="simple table"
+            >
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+                 rows.slice().sort(getComparator(order, orderBy)) */}
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow
+                        tabIndex={-1}
+                        key={row.fullname}
+                        className="table-body-row"
                       >
-                        {row.fullname}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.calories}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.fat}
-                      </TableCell>
-                      <TableCell align="right" className="table-body-item">
-                        {row.carbs}
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        className="sticky-item"
-                        style={{ right: 0 }}
-                      >
-                        {row.protein}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: 53 * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          className="sticky-item table-cell"
+                        >
+                          {row.fullname}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          className="table-body-item table-cell"
+                        >
+                          {row.calories}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          className="table-body-item table-cell"
+                        >
+                          {row.fat}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          className="table-body-item table-cell"
+                        >
+                          {row.carbs}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          className="sticky-item table-cell"
+                          style={{ right: 0 }}
+                        >
+                          {row.protein}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: 53 * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
+
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
