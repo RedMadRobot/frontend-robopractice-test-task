@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
+
 import TextField from '@mui/material/TextField';
 
 import Paper from '@mui/material/Paper';
-import { visuallyHidden } from '@mui/utils';
+
 import { Container } from '@mui/system';
+
+//import { DataManagerContext } from '../context/context';
+import EnhancedTableHead from '../tablehead/tablehead';
 
 function createData(fullname, calories, fat, carbs, protein) {
   return {
@@ -73,82 +74,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: 'fullname',
-    numeric: false,
-    disablePadding: true,
-    label: 'Full name',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-  {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
-  },
-  {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
-  },
-  {
-    id: 'protein',
-    numeric: true,
-    disablePadding: false,
-    label: 'Protein (g)',
-  },
-];
-
-function EnhancedTableHead(props) {
-  const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-            className={'table-head-item sticky-item table-cell'}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
 const requestSearch = (event) => {
   const val =
     event.target.value === '' ? 'give default array' : 'show filtered array';
@@ -156,30 +81,13 @@ const requestSearch = (event) => {
 };
 
 export default function EnhancedTable() {
-  useEffect(() => {
-    async function fetchData(url, options) {
-      const response = await fetch(url, options);
-      const data = await response.json();
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('calories');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-      return data;
-    }
-
-    if (window) {
-      const data = fetchData('http://localhost:8080/api/users', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      console.log(JSON.stringify(data));
-    }
-  }, []);
-
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  //const [defaultData] = useContext(DataManagerContext);
+  //console.log(defaultData);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
