@@ -1,8 +1,9 @@
 import React from 'react';
 
+import EnhancedTable from '../table/table';
+
 const App = () => {
-  const message = 'Hello React on webpack rails';
-  return <h1>{message}</h1>;
+  return <EnhancedTable />;
 };
 
 export default App;
