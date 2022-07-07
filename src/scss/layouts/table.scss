@@ -3,19 +3,22 @@
   left: 0;
 
   background: white;
+}
 
-  // box-shadow: 5px 2px 5px grey;
-  // border-right: 2px solid #e0e0e0;
+.table-cell {
+  min-width: 40px !important;
+
+  height: 72px;
+  min-height: 40px !important;
+  padding: 0 16px !important;
 }
 
 .table-head-item {
-  min-width: 120px !important;
-
-  max-width: 120px !important;
-
   & > span {
     display: flex;
     flex-direction: row;
+
+    white-space: nowrap;
   }
 
   & + & span {
@@ -43,9 +46,7 @@
 }
 
 .table-body-item {
-  min-width: 120px !important;
-
-  max-width: 120px !important;
+  min-width: 40px !important;
 
   text-align: center !important;
 }

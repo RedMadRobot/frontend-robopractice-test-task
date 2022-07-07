@@ -1,0 +1,12 @@
+.search-box {
+  max-width: 30vw;
+  margin: 0 !important;
+
+  @media screen and (max-width: 978px) {
+    max-width: 100vw;
+  }
+}
+
+.search-box > .search-bar {
+  margin: 16px 0;
+}
