@@ -15,12 +15,19 @@ const Searchbar = () => {
   // template data save in localstorage and update if key: hashsum changed
 
   const handleChange = (event) => {
-    setSearch(event.target.value);
-    updateData(
-      data.filter((item) =>
-        item.fullname.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    const val = event.target.value;
+    if (!val) {
+      setSearch('');
+      updateData(templateData);
+    } else {
+      setSearch(val);
+
+      updateData(
+        data.filter((item) =>
+          item.fullname.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
   };
 
   const handleClear = () => {
