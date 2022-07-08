@@ -69,6 +69,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.7",
     "cors": "^2.8.5",
     "react": "^18.2.0",
