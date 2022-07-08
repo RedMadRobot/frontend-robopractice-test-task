@@ -14,6 +14,7 @@ app.use(
 );
 
 app.get('/api/users', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
   res.send(require('./data.json'));
 });
 
