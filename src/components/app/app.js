@@ -1,15 +1,13 @@
 import React from 'react';
 
 import EnhancedTable from '../table/table';
-import { DataManagerContextProvider } from '../context/context';
-import DataStorage from '../storage/storage';
+import { DataStorageContextProvider } from '../context/context';
 
 const App = () => {
   return (
-    <DataManagerContextProvider>
-      <DataStorage />
+    <DataStorageContextProvider>
       <EnhancedTable />
-    </DataManagerContextProvider>
+    </DataStorageContextProvider>
   );
 };
 
