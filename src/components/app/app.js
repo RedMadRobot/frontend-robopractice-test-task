@@ -1,8 +1,14 @@
 import React from 'react';
 
+import EnhancedTable from '../table/table';
+import { DataStorageContextProvider } from '../context/context';
+
 const App = () => {
-  const message = 'Hello React on webpack rails';
-  return <h1>{message}</h1>;
+  return (
+    <DataStorageContextProvider>
+      <EnhancedTable />
+    </DataStorageContextProvider>
+  );
 };
 
 export default App;

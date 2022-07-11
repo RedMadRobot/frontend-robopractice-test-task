@@ -1,3 +1,11 @@
 @import './modules/fonts';
 @import './modules/mixins';
 @import './modules/vars';
+
+@import './layouts/table';
+@import './layouts/searchbar';
+
+.container-inner {
+  padding-right: 16px !important;
+  padding-left: 16px !important;
+}
