@@ -10,7 +10,10 @@ const Searchbar = (props) => {
   const { field, rows, updateRows, copyRows } = props;
   const [search, setSearch] = useState('');
 
-  // template data save in localstorage and update if key: hashsum changed
+  const filterRows = (val, array) =>
+    [...new Set(array)].filter((item) =>
+      item[field].toLowerCase().includes(val.toLowerCase())
+    );
 
   const handleChange = (event) => {
     const val = event.target.value;
@@ -20,12 +23,13 @@ const Searchbar = (props) => {
       updateRows(copyRows);
     } else {
       setSearch(val);
-      updateRows(
-        // eslint-disable-next-line react/prop-types
-        rows.filter((item) =>
-          item[field].toLowerCase().includes(search.toLowerCase())
-        )
-      );
+      updateRows(filterRows(val, [...rows, ...copyRows]));
+    }
+  };
+
+  const handleDelete = ({ key }) => {
+    if (key === 'Delete' || key === 'Backspace') {
+      updateRows(filterRows(search, copyRows));
     }
   };
 
@@ -42,7 +46,8 @@ const Searchbar = (props) => {
       className="search-bar"
       value={search}
       fullWidth
-      onChange={handleChange}
+      onKeyDown={handleDelete}
+      onInput={handleChange}
       InputProps={{
         endAdornment: !search ? (
           <IconButton>
