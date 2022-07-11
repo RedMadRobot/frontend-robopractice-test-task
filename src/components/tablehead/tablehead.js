@@ -37,7 +37,7 @@ function EnhancedTableHead(props) {
 
   const headCells = [
     {
-      id: 'fullname',
+      id: 'Fullname',
       numeric: false,
       disablePadding: true,
       label: 'Full name',

@@ -1,30 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
-import { DataManagerContext, SearchContext } from '../context/context';
-import { templateData } from '../../modules/templatedata';
 
-const Searchbar = () => {
+const Searchbar = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { search, setSearch } = useContext(SearchContext);
-  const { data, updateData } = useContext(DataManagerContext);
+  const { field, rows, updateRows, copyRows } = props;
+  const [search, setSearch] = useState('');
 
   // template data save in localstorage and update if key: hashsum changed
 
   const handleChange = (event) => {
     const val = event.target.value;
+
     if (!val) {
       setSearch('');
-      updateData(templateData);
+      updateRows(copyRows);
     } else {
       setSearch(val);
-
-      updateData(
-        data.filter((item) =>
-          item.fullname.toLowerCase().includes(search.toLowerCase())
+      updateRows(
+        // eslint-disable-next-line react/prop-types
+        rows.filter((item) =>
+          item[field].toLowerCase().includes(search.toLowerCase())
         )
       );
     }
@@ -32,7 +31,7 @@ const Searchbar = () => {
 
   const handleClear = () => {
     setSearch('');
-    updateData(templateData);
+    updateRows(copyRows);
   };
 
   return (

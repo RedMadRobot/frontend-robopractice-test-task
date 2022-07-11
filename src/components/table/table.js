@@ -10,19 +10,21 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Container } from '@mui/system';
 
-import { DataManagerContext, SearchContextProvider } from '../context/context';
+import { DataStorageContext } from '../context/context';
 import EnhancedTableHead from '../tablehead/tablehead';
 
 import { stableSort, getComparator } from '../../modules/sorting';
 import Searchbar from '../searchbar/searchbar';
 
 const EnhancedTable = () => {
+  const { data, isLoading, updateData, defaultData } = useContext(DataStorageContext);
+
   const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('calories');
+  const [orderBy, setOrderBy] = useState('Fullname');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const { data } = useContext(DataManagerContext);
+  const searchField = 'Fullname';
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -54,14 +56,21 @@ const EnhancedTable = () => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
+  if (isLoading) {
+    return (
+      <Box>
+        <Paper></Paper>
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }} className="paper-box">
         <Container maxWidth="false" className="container-inner search-box">
-          <SearchContextProvider>
-            <Searchbar />
-          </SearchContextProvider>
+          <Searchbar field={searchField} rows={data} updateRows={updateData} copyRows={defaultData} />
         </Container>
+
         <Container maxWidth="false" className="container-inner">
           <TableContainer sx={{ maxHeight: 480 }}>
             <Table
@@ -86,7 +95,7 @@ const EnhancedTable = () => {
                     return (
                       <TableRow
                         tabIndex={-1}
-                        key={row.fullname}
+                        key={row.Fullname}
                         className="table-body-row"
                       >
                         <TableCell
@@ -95,7 +104,7 @@ const EnhancedTable = () => {
                           scope="row"
                           className="sticky-item table-cell"
                         >
-                          {row.fullname}
+                          {row.Fullname}
                         </TableCell>
                         <TableCell
                           align="right"
