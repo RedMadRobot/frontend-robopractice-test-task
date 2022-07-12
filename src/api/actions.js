@@ -12,5 +12,7 @@ export const getUsers = (callback) => {
     port: '8080',
   });
 
-  response.then((response) => callback(createData(response)));
+  response
+    .then((response) => createData(response))
+    .then((result) => callback(result));
 };

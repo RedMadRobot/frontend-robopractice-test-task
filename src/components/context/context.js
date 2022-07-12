@@ -11,17 +11,25 @@ export const DataStorageContextProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
 
   const updateData = (dump) => setData(dump);
+
   const initData = (dump) => {
     setData(dump);
     setDefaultData(dump);
-  }
+  };
 
   useEffect(() => {
     getUsers(initData); // save fetch result into data (temp) and defaultData
     setLoading(false); // hide load state
   }, []);
 
-  const value = { data, updateData, isLoading, defaultData, setDefaultData };
+  const value = {
+    data,
+    updateData,
+    isLoading,
+    defaultData,
+    setDefaultData,
+    initData
+  };
 
   return (
     <DataStorageContext.Provider value={value}>
