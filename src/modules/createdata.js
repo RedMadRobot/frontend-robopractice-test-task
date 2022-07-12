@@ -7,7 +7,8 @@ const getDaysNumInMonth = (date) => {
 };
 
 const buildEmptyDays = (DaysCount, DayTemplate) => {
-  const yearMonth = DayTemplate.split('-', 2);
+  // eslint-disable-next-line no-unused-vars
+  const [y, m, d] = DayTemplate.split('-');
 
   const Days = [];
 
@@ -16,7 +17,7 @@ const buildEmptyDays = (DaysCount, DayTemplate) => {
     const Day = index % 10 === index ? `0${index}` : index;
 
     Days.push({
-      Date: [yearMonth, Day].join('-'),
+      Date: [y, m, Day].join('-'),
       Start: '',
       End: '',
       sumDay: 0,
@@ -30,7 +31,7 @@ const createEmptyData = (DaysCount, DayTemplate, length) => {
   const emptyObject = {
     id: 0,
     Fullname: '',
-    totalSum: 0,
+    totalSum: null,
     Days: buildEmptyDays(DaysCount, DayTemplate),
   };
 
@@ -43,8 +44,8 @@ const createEmptyData = (DaysCount, DayTemplate, length) => {
 };
 
 const toMinutes = (value, sep) => {
-  const tempTime = value.split(sep);
-  return parseInt(tempTime) * 60 + parseInt(tempTime[1]);
+  const [h, m] = value.split(sep);
+  return parseInt(h) * 60 + parseInt(m);
 };
 
 const countPassDiff = (Start, End) => {
@@ -66,7 +67,6 @@ export const createData = (dump) => {
   const daysNumber = getDaysNumInMonth(Date); // count days in month
 
   const dataEmptyTemplate = createEmptyData(daysNumber, Date, dump.length); // hold empty template array
-  //console.log(dataEmptyTemplate);
 
   return dataEmptyTemplate.map(({ id, Fullname, totalSum, Days }, i) => {
     let defaultDump = dump[i];
@@ -74,26 +74,28 @@ export const createData = (dump) => {
     id = defaultDump.id;
     Fullname = defaultDump.Fullname;
 
-    Days = Days.map(({ Start, End, sumDay, Date }, j) => {
-      if (defaultDump.Days[j]) {
-        const { StartDefault, EndDefault } = defaultDump.Days[j];
-
-        if (defaultDump.Days[j] === Date) {
-          Start = StartDefault;
-          End = EndDefault;
-          sumDay = countPassDiff(Start, End);
-
-          totalSum += sumDay;
-        }
-      }
+    const CrossDays = defaultDump.Days.map(({ Start, End, Date }) => {
+      const sumDay = countPassDiff(Start, End);
+      totalSum += sumDay;
 
       return {
         Date,
         Start,
         End,
-        sumDay,
+        sumDay: sumDay,
       };
     });
+
+    Days = [
+      ...CrossDays,
+      ...Days.filter(({ Date }, index) => {
+        if (!CrossDays[index]) {
+          return false;
+        }
+
+        CrossDays[index].Date !== Date;
+      }),
+    ];
 
     return {
       id,
