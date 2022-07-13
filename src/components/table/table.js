@@ -86,8 +86,7 @@ const EnhancedTable = () => {
                 {stableSort(data, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
-                    const labelId = `enhanced-table-checkbox-${index}`;
-
+                    const labelId = `enhanced-table-row-name-${index}`;
                     return (
                       <TableRow
                         tabIndex={-1}
@@ -105,13 +104,25 @@ const EnhancedTable = () => {
 
                         {row.Days.map(({ Date, Start, End, sumDay }) => (
                           <TableCell
-                            key={`${row.id}-${row.Fullname}-${Date}`}
+                            key={`${row.id}-${Date}`}
                             align="right"
                             className="table-body-item table-cell"
                             aria-label={
-                              sumDay ? `${Date}: c ${parseClockTime(Start, '-')} до ${parseClockTime(End, '-')}` : `${Date}: 0`
+                              sumDay
+                                ? `${Date}: c ${parseClockTime(
+                                    Start,
+                                    '-'
+                                  )} до ${parseClockTime(End, '-')}`
+                                : `${Date}: 0`
                             }
-                            title={sumDay ? `${Date}: c ${parseClockTime(Start, '-')} до ${parseClockTime(End, '-')}` : `${Date}: 0`}
+                            title={
+                              sumDay
+                                ? `${Date}: c ${parseClockTime(
+                                    Start,
+                                    '-'
+                                  )} до ${parseClockTime(End, '-')}`
+                                : `${Date}: 0`
+                            }
                           >
                             {sumDay ? getPassDate(sumDay, ':') : 0}
                           </TableCell>
