@@ -107,7 +107,6 @@ export const createData = (dump) => {
         })
         .filter((item) => item !== null);
 
-
       return {
         id,
         Fullname,
