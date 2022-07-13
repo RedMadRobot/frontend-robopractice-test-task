@@ -15,9 +15,11 @@ import EnhancedTableHead from '../tablehead/tablehead';
 
 import { stableSort, getComparator } from '../../modules/sorting';
 import Searchbar from '../searchbar/searchbar';
+import { getPassDate, parseClockTime } from '../../api/createdata';
 
 const EnhancedTable = () => {
-  const { data, isLoading, updateData, defaultData } = useContext(DataStorageContext);
+  const { data, isLoading, updateData, defaultData } =
+    useContext(DataStorageContext);
 
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('Fullname');
@@ -41,17 +43,6 @@ const EnhancedTable = () => {
     setPage(0);
   };
 
-  //let { search } = useContext(SearchContext);
-
-  /* const filterDataResult = () =>
-    updateData(
-      data.filter((item) =>
-        item.fullname.toLowerCase().includes(search.toLowerCase())
-      )
-    ); */
-
-  //const resetDataResult = () => updateData(copyDefaultData);
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
@@ -68,7 +59,12 @@ const EnhancedTable = () => {
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }} className="paper-box">
         <Container maxWidth="false" className="container-inner search-box">
-          <Searchbar field={searchField} rows={data} updateRows={updateData} copyRows={defaultData} />
+          <Searchbar
+            field={searchField}
+            rows={data}
+            updateRows={updateData}
+            copyRows={defaultData}
+          />
         </Container>
 
         <Container maxWidth="false" className="container-inner">
@@ -90,8 +86,7 @@ const EnhancedTable = () => {
                 {stableSort(data, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
-                    const labelId = `enhanced-table-checkbox-${index}`;
-
+                    const labelId = `enhanced-table-row-name-${index}`;
                     return (
                       <TableRow
                         tabIndex={-1}
@@ -106,30 +101,47 @@ const EnhancedTable = () => {
                         >
                           {row.Fullname}
                         </TableCell>
-                        <TableCell
-                          align="right"
-                          className="table-body-item table-cell"
-                        >
-                          {row.calories}
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                          className="table-body-item table-cell"
-                        >
-                          {row.fat}
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                          className="table-body-item table-cell"
-                        >
-                          {row.carbs}
-                        </TableCell>
+
+                        {row.Days.map(({ Date, Start, End, sumDay }) => (
+                          <TableCell
+                            key={`${row.id}-${Date}`}
+                            align="right"
+                            className="table-body-item table-cell"
+                            aria-label={
+                              sumDay
+                                ? `${Date}: c ${parseClockTime(
+                                    Start,
+                                    '-'
+                                  )} до ${parseClockTime(End, '-')}`
+                                : `${Date}: 0`
+                            }
+                            title={
+                              sumDay
+                                ? `${Date}: c ${parseClockTime(
+                                    Start,
+                                    '-'
+                                  )} до ${parseClockTime(End, '-')}`
+                                : `${Date}: 0`
+                            }
+                          >
+                            {sumDay ? getPassDate(sumDay, ':') : 0}
+                          </TableCell>
+                        ))}
+
                         <TableCell
                           align="right"
                           className="sticky-item table-cell"
                           style={{ right: 0 }}
+                          aria-label={`Суммарное время: ${getPassDate(
+                            row.totalSum,
+                            ':'
+                          )}`}
+                          title={`Суммарное время: ${getPassDate(
+                            row.totalSum,
+                            ':'
+                          )}`}
                         >
-                          {row.protein}
+                          {getPassDate(row.totalSum, ':')}
                         </TableCell>
                       </TableRow>
                     );
