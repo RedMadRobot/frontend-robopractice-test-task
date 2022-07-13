@@ -1,5 +1,5 @@
 import { fetchData } from '../modules/fetchdata';
-import { createData } from '../modules/createdata';
+import { createData } from './createdata';
 
 export const getUsers = (callback) => {
   const response = fetchData('http://localhost:8080/api/users', {
