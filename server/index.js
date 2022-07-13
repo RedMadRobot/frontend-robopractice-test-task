@@ -8,6 +8,7 @@ app.use(
     origin: [
       'http://localhost', // prod workflow (port: 80)
       'http://localhost:3000', // dev workflow
+      'null' // for local check
     ],
     methods: 'GET',
   })
