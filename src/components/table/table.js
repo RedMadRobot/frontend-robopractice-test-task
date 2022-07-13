@@ -15,7 +15,7 @@ import EnhancedTableHead from '../tablehead/tablehead';
 
 import { stableSort, getComparator } from '../../modules/sorting';
 import Searchbar from '../searchbar/searchbar';
-import { getPassDate } from '../../modules/createdata';
+import { getPassDate, parseClockTime } from '../../modules/createdata';
 
 const EnhancedTable = () => {
   const { data, isLoading, updateData, defaultData } =
@@ -109,9 +109,9 @@ const EnhancedTable = () => {
                             align="right"
                             className="table-body-item table-cell"
                             aria-label={
-                              sumDay ? `${Date}: c ${Start} до ${End}` : `${Date}: 0`
+                              sumDay ? `${Date}: c ${parseClockTime(Start, '-')} до ${parseClockTime(End, '-')}` : `${Date}: 0`
                             }
-                            title={sumDay ? `${Date}: c ${Start} до ${End}` : `${Date}: 0`}
+                            title={sumDay ? `${Date}: c ${parseClockTime(Start, '-')} до ${parseClockTime(End, '-')}` : `${Date}: 0`}
                           >
                             {sumDay ? getPassDate(sumDay, ':') : 0}
                           </TableCell>
