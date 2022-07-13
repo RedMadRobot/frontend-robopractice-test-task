@@ -1,3 +1,7 @@
+import _ from 'lodash';
+
+export const parseClockTime = (val, sep) => val.split(sep).join(':');
+
 const getDaysNumInMonth = (date) => {
   // eslint-disable-next-line no-unused-vars
   const [y, m, d] = date.split('-');
@@ -64,36 +68,52 @@ export const getPassDate = (value, sep) => {
 };
 
 export const createData = (dump) => {
-  const { Date } = dump[0].Days[0];
-  const daysNumber = getDaysNumInMonth(Date); // count days in month
+  if (dump.length) {
+    const { Date } = dump[0].Days[0];
+    const daysNumber = getDaysNumInMonth(Date); // count days in month
 
-  const dataEmptyTemplate = createEmptyData(daysNumber, Date, dump.length); // hold empty data dump
+    const dataEmptyTemplate = createEmptyData(daysNumber, Date, dump.length); // hold empty data dump
 
-  return dataEmptyTemplate.map(({ id, Fullname, totalSum, Days }, i) => {
-    let defaultDump = dump[i];
+    return dataEmptyTemplate.map(({ id, Fullname, totalSum, Days }, i) => {
+      let defaultDump = dump[i];
 
-    id = defaultDump.id;
-    Fullname = defaultDump.Fullname;
+      id = defaultDump.id;
+      Fullname = defaultDump.Fullname;
 
-    const DefaultDays = defaultDump.Days.map(({ Start, End, Date }) => {
-      const sumDay = countPassDiff(Start, End);
-      totalSum += sumDay;
+      const DefaultDays = defaultDump.Days.map(({ Start, End, Date }) => {
+        const sumDay = countPassDiff(Start, End);
+        totalSum += sumDay;
+
+        return {
+          Date,
+          Start,
+          End,
+          sumDay: sumDay,
+        };
+      });
+
+      const doubles = [...Days, ...DefaultDays];
+
+      Days = _.orderBy(doubles, ['Date', 'sumDay'], ['asc', 'desc'])
+        .map((item, index, self) => {
+          if (
+            index > 0 &&
+            self[index - 1].Date === item.Date &&
+            self[index - 1].sumDay > item.sumDay
+          ) {
+            item = null;
+          }
+          return item;
+        })
+        .filter((item) => item !== null);
+
 
       return {
-        Date,
-        Start,
-        End,
-        sumDay: sumDay,
+        id,
+        Fullname,
+        Days,
+        totalSum,
       };
     });
-
-    Days = [...Days, ...DefaultDays];
-
-    return {
-      id,
-      Fullname,
-      Days,
-      totalSum,
-    };
-  });
+  }
 };

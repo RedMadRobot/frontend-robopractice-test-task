@@ -15,7 +15,7 @@ import EnhancedTableHead from '../tablehead/tablehead';
 
 import { stableSort, getComparator } from '../../modules/sorting';
 import Searchbar from '../searchbar/searchbar';
-import { getPassDate, parseClockTime } from '../../modules/createdata';
+import { getPassDate, parseClockTime } from '../../api/createdata';
 
 const EnhancedTable = () => {
   const { data, isLoading, updateData, defaultData } =
