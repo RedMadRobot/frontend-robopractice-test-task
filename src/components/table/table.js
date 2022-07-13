@@ -109,9 +109,9 @@ const EnhancedTable = () => {
                             align="right"
                             className="table-body-item table-cell"
                             aria-label={
-                              sumDay && `${Date}: c ${Start} до ${End}`
+                              sumDay ? `${Date}: c ${Start} до ${End}` : `${Date}: 0`
                             }
-                            title={sumDay && `${Date}: c ${Start} до ${End}`}
+                            title={sumDay ? `${Date}: c ${Start} до ${End}` : `${Date}: 0`}
                           >
                             {sumDay ? getPassDate(sumDay, ':') : 0}
                           </TableCell>
