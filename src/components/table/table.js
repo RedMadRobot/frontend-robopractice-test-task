@@ -108,13 +108,12 @@ const EnhancedTable = () => {
                             key={`${row.id}-${row.Fullname}-${Date}`}
                             align="right"
                             className="table-body-item table-cell"
-                            aria-label={`${Date}: c ${getPassDate(
-                              Start,
-                              ':'
-                            )} до ${getPassDate(End, ':')}`}
-                            title={`${Date}: c ${Start} до ${End}`}
+                            aria-label={
+                              sumDay && `${Date}: c ${Start} до ${End}`
+                            }
+                            title={sumDay && `${Date}: c ${Start} до ${End}`}
                           >
-                            {getPassDate(sumDay, ':')}
+                            {sumDay ? getPassDate(sumDay, ':') : 0}
                           </TableCell>
                         ))}
 
