@@ -10,11 +10,12 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useMemo } from 'react';
 
-export default function MyTable() {
+const MyTable = ({searchQuery}) => {
     const [users, setUsers] = useState([]);
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const monthDays = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 
     useEffect(() => {
@@ -25,6 +26,10 @@ export default function MyTable() {
       const response = await axios.get("http://localhost:8080/api/users");
       setUsers(response.data);
     }
+
+    const getSearchedUsers = () => {
+      return users.filter(user => user.Fullname.toLowerCase().includes(searchQuery.toLowerCase()))
+    };
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -100,22 +105,23 @@ export default function MyTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>User</TableCell>
+            <TableCell style={{position:"sticky", top:"0", left:"0", background:"white"}}>User</TableCell>
             {monthDays.map(monthDay => (
               <TableCell key = {monthDays.indexOf(monthDay) + 1}>{monthDays.indexOf(monthDay) + 1}</TableCell>
             ))}
             
-            <TableCell>Monthly</TableCell>
+            <TableCell style={{position:"sticky", top:"0", right:"0", background:"white"}}>Monthly total</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {users.map((user) => (
+
+          {getSearchedUsers().map((user) => (
 
             <TableRow
               key={user.id}
             >
-              <TableCell component="th" scope="row">
+              <TableCell style={{position:"sticky", top:"0", left:"0", background:"white"}} component="th" scope="row">
                 {user.Fullname}
               </TableCell>
 
@@ -124,7 +130,7 @@ export default function MyTable() {
                   <TableCell key={user.id + day + index } align="right">{getUserMonthActivity(user)[index]}</TableCell>
                 ))}
 
-              <TableCell align="right">{getTotalTime(user.Days)}</TableCell>
+              <TableCell align="right" style={{position:"sticky", top:"0", right:"0", background:"white"}}>{getTotalTime(user.Days)}</TableCell>
 
            </TableRow>
           ))}
@@ -143,3 +149,5 @@ export default function MyTable() {
     </Paper>
   );
 }
+
+export default MyTable;
