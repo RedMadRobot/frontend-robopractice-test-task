@@ -5,14 +5,15 @@
   height: 100vh;
   justify-content: center;
 }
+
 .ant-table{
   margin: 0 auto;
-  // margin-top: 50px;
   max-width: 90vw;
   border: 1px solid #f0f0f0;
   border-radius: 4px;
   overflow: hidden;
 }
+
 .ant-pagination{
   justify-content: center !important;
 }
@@ -33,6 +34,7 @@
       // height: 2px;
       background-color: #fafafa !important;
     }
+
     ::-webkit-scrollbar-corner{
       background-color: #fafafa !important;
     }

@@ -1,40 +1,18 @@
-import React, { HTMLAttributes, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { ColumnsType, ColumnType } from "antd/lib/table";
 import timeHelper from "utils/helpers/time.helpers";
 import tableHelper from "utils/helpers/table.helpers";
 import IUser from "types/IUser";
+import IUserRaw from "types/IUserRaw";
 import api from "api/api";
 import TableMain from "components/TableMain/TableMain";
 import TableHeader from "components/TableHeader/TableHeader";
 import { ResizeCallbackData } from "react-resizable";
 import ResizableTitle from "components/ResizableTitle/ResizableTitle";
-import IUserRaw from "types/IUserRaw";
 
 function App() {
-  const [daysList, setDaysList] = useState(() => {
-    const numberOfDays: number = new Date(2021, 5, 0).getDate(); // Пока рассматриваем только май.
-    const daysArr = [];
-    for (let i = 1; i <= numberOfDays; i++) {
-      daysArr.push(i + "");
-    }
-    return daysArr;
-  });
-  const [serverData, setServerData] = useState<IUserRaw[]>(() => {
-    if (localStorage.getItem("serverData")) {
-      const localServerData = JSON.parse(localStorage.getItem("serverData")!);
-      console.log("LOCAL: ", localServerData);
-      return localServerData;
-    } else {
-      return [
-        {
-          id: 12,
-          Fullname: "Max",
-          Days: [{ Date: "2021-05-01", End: "14-44", Start: "12-01" }],
-        },
-      ];
-    }
-  });
+  const [daysList, setDaysList] = useState(timeHelper.getDaysList(2021, 5, 0));
   const [columns, setColumns] = useState<ColumnsType<IUser>>(() => {
     if (localStorage.getItem("serverData")) {
       return [
@@ -70,7 +48,12 @@ function App() {
   });
   const [dataRows, setDataRows] = useState(() => {
     if (localStorage.getItem("serverData")) {
-      return [...tableHelper.createFullUserRows(serverData, daysList)];
+      return [
+        ...tableHelper.createFullUserRows(
+          JSON.parse(localStorage.getItem("serverData")!),
+          daysList
+        ),
+      ];
     } else {
       return [
         {
@@ -86,20 +69,20 @@ function App() {
   const [filteredRows, setFilteredRows] = useState(dataRows);
   const [searchText, setSearchText] = useState("");
 
-  const handleSearchChange = (e: any) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
     if (e.target.value === "") {
       setFilteredRows(dataRows);
     }
   };
 
-  const handleSearch = (inputValue: any) => {
+  const handleSearch = (inputValue: string) => {
     if (searchText === "") {
       setFilteredRows(dataRows);
     } else {
       setFilteredRows(
-        [...filteredRows].filter((val: any) =>
-          val.username.toLowerCase().includes(inputValue.toLowerCase())
+        [...dataRows].filter((userData: IUser) =>
+          userData.username.toLowerCase().includes(inputValue.toLowerCase())
         )
       );
     }
@@ -116,16 +99,15 @@ function App() {
       setColumns(newColumns);
     };
 
-  const mergeColumns: any = columns.map((col, index) => ({
+  const mergeColumns: ColumnsType<IUser> = columns.map((col, index) => ({
     ...col,
-    onHeaderCell: (column: any) => ({
+    onHeaderCell: (column) => ({
       width: (column as ColumnType<IUser>).width,
       onResize: handleResize(index),
     }),
   }));
 
-  const updateStates = (data: any): void => {
-    setServerData(data);
+  const updateStates = (data: IUserRaw[]): void => {
     setColumns([
       {
         title: "Fullname",
@@ -152,14 +134,13 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       const data = await api.fetchData();
-      setServerData(JSON.parse(data));
       updateStates(JSON.parse(data));
       return data;
     }
     if (!localStorage.getItem("serverData")) {
       fetchData();
     }
-  }, [dataRows, daysList, serverData]);
+  }, [dataRows, daysList]);
 
   return (
     <TableMain

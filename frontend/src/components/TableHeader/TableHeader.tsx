@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
 import { Input } from "antd";
 import "./TableHeader.scss";
 
 const TableHeader = (props: any) => {
   const { Search } = Input;
-  useEffect(() => {
-    console.log("rerender");
-  }, []);
+
   return (
     <>
       <Search
