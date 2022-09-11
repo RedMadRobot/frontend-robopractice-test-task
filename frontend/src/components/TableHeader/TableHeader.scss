@@ -1,0 +1,36 @@
+.ant-table-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 700px) {
+    flex-wrap: wrap;
+  }
+
+  .ant-input-search{
+    display: flex;
+    width: auto;
+    justify-content: flex-start;
+
+    @media screen and (max-width: 700px) {
+      &{
+        width: 100%;
+      }
+    }
+  }
+
+
+  p{
+    margin: 0;
+    vertical-align: middle;
+    @media screen and (max-width: 700px) {
+        &{
+          order: -1;
+          padding-bottom: 20px;
+        }
+      }
+  }
+}
+
+.ant-input{
+  width: 200px !important;
+}
