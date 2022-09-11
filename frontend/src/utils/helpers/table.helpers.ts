@@ -54,11 +54,10 @@ const createFullUserRows = (data: IUserRaw[], daysArr: string[]) => {
   /**
    * @returns {IUser[]} fully filled table rows
   */
-  return data.reduce((init: any, current, index) => {
+  return data.reduce((init: any, current) => {
     init.push(createRow(current, daysArr));
     return init;
-  },[])
-
+  }, []);
 }
 
 const tableHelper = {
