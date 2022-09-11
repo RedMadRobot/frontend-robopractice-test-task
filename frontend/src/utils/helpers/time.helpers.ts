@@ -32,10 +32,23 @@ const timeDiff = (end: string, start: string, separator: string = "-"): number =
   return (timeToMinutes(end, "-") - timeToMinutes(start, "-"));
 }
 
+const getDaysList = (year: number, month: number, day: number): string[] => {
+  /**
+   * @return: array of days - ["1","2"..."30","31"]
+  */
+  const numberOfDays: number = new Date(year, month, day).getDate();
+  const daysArr = [];
+  for (let i = 1; i <= numberOfDays; i++) {
+    daysArr.push(i + "");
+  }
+  return daysArr;
+}
+
 const timeHelper = {
   timeDiff,
   timeToMinutes,
-  minutesToTime
+  minutesToTime,
+  getDaysList
 }
 
 export default timeHelper;
