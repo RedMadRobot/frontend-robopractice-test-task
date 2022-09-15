@@ -1,36 +1,70 @@
-## Задание
+# Getting Started with Create React App
 
-У нас есть данные о том сколько сотрудники компании проводят времени в соцсетях с рабочего компьютера. Нам поступило задание сделать приложение, в котором можно удобно просматривать данную информацию с возможностью видеть
-- временя за каждый день месяца
-- общее время за месяц
-- искать сотрудника по имени
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-Веб-приложение необходимо реализовать с использованием React (обязательно), typescript/javascript на выбор. Можно использовать библиотеки компонентов, например MUI React, Ant Design или другие. Также можно воспользоваться create-react-app для сборки или сделать сборку самому используя любой удобный tool, например webpack, rollup, parcel, vite, esbuild или другие.
+In the project directory, you can run:
 
+### `npm start`
 
-Приложение представляет из себя таблицу с пользователями со столбцами | User | 1 | 2 | 3 | ... | Monthly |, где User - Имя пользователя, 1, 2, 3 - числа месяца, Monthly total - время проведенное пользователем в приложении за месяц
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-Пример таблицы
+### `npm test`
 
-![example1](/example1.png "example1")
-![example2](/example2.png "example2")
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Для каждой строки в дни месяца отобразить количество времени который провел пользователь в этот день, если данных за этот день нет, то отобразить 0.
+### `npm run build`
 
-В колонку Monthly total отобразить все количество времени пользователя за месяц.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-##### Как получить данные для таблицы
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-1. Запустить команду `npm run server`
-2. Сервер имеет endpoint GET /api/users, который возвращает необходимые данные
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### Дополнительно:
+### `npm run eject`
 
-1. Для каждой колонки реализовать сортировку по возрастанию и убыванию;
-2. Реализовать поиск по имени пользователя (поле Fullname);
-3. Реализовать постраничную пагинацию на фронтенде (получаем с бэка полный список, на страницы разбиваем на фронте)
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-4. Первая и последняя колонка (User and Monthly total) должны быть приклеены к своим сторонам, то есть при горизонтальном скролле они не должны скрываться;
-5. Колонки таблицы должны быть resizeable;
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
