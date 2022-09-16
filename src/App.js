@@ -1,24 +1,27 @@
 import React from "react";
 import { Table } from "antd";
 import { getData } from "./Api/api";
-import { useState, useEffect } from "react";
-import { restructData } from "./utils/userRefact";
+import { useState, useEffect, useRef } from "react";
+import { restructData, createColumns } from "./utils/userRefact";
 import 'antd/dist/antd.css';
-import { DAYOFMONTH } from "./utils/constants";
+import { ResizableTitle } from "./components/ResizableTitle";
+
 
 const App = () => {
   const [Data, setData] = useState([]);
-  const [columns, setColumns] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = useRef(null);
+
+  const [columns, setColumns] = useState(createColumns(searchText, searchedColumn, searchInput, handleSearch, handleReset, setSearchText, setSearchedColumn));
 
   useEffect(() => {
     getData()
       .then((data) => {
-        console.log(data);
         const newData = restructData(data);
         setData(newData);
-        setColumns(createColumns);
-        console.log(newData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -26,47 +29,48 @@ const App = () => {
       });
   }, []);
 
-  function createColumns() {
-    const columns = [
-      {
-        key: "id",
-        title: "ФИО",
-        dataIndex: "Fullname",
-        width: 150,
-        fixed: 'left',
-      }]
-      for(let i=1; i <= DAYOFMONTH ; i++) {
-        const newRecord = {
-          title: i,
-          dataIndex: i,
-          sorter: (a, b) => a[i] - b[i],
-          sortDirections: ['ascend', 'descend'],  
-          width: 100,
-        }
-        columns.push(newRecord);
-      }
-      columns.push(
-      {
-        title: "Всего",
-        dataIndex: "total",
-        align: "right",
-        fixed: 'right',
-        width: 100,
-      })
+  function  handleSearch(selectedKeys, confirm, dataIndex) {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
 
-    return columns;
-  }
+  function handleReset(clearFilters) {
+    clearFilters();
+    setSearchText('');
+  };
+
+
+  const handleResize =
+  (index) =>
+  (_, { size }) => {
+    const newColumns = [...columns];
+    newColumns[index] = { ...newColumns[index], width: size.width };
+    setColumns(newColumns);
+  };
+
+const mergeColumns = columns.map((col, index) => ({
+  ...col,
+  onHeaderCell: (column) => ({
+    width: column.width,
+    onResize: handleResize(index),
+  }),
+}));
 
   return (
     <>
       <div className="app">
         <div className="table">
-          {isLoading ? (
-            <h2>Идет загрузка</h2>
-          ) : (
-            <Table
+        <h4>Отчет по сотрудникам</h4>
+           <Table
+            loading={isLoading}
+               components={{
+                header: {
+                  cell: ResizableTitle,
+                },
+              }}        
               dataSource={Data}
-              columns={columns}
+              columns={mergeColumns}
               pagination={{ position: ["bottomRight"] }}
               bordered={true}
               scroll={{
@@ -74,7 +78,6 @@ const App = () => {
                 y: 1000,
               }}
             />
-          )}
         </div>
       </div>
     </>

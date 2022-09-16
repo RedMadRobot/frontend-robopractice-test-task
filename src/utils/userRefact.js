@@ -1,4 +1,5 @@
 import { DAYOFMONTH } from "./constants";
+import { getColumnSearchProps } from "../components/ColumnSearch";
 
 export function restructData(data) {
     const newData = data.map(item => {
@@ -37,3 +38,38 @@ function calcTotal(user) {
     }
     return total;
 }
+
+export function createColumns(searchText, searchedColumn, searchInput, handleSearch, handleReset, setSearchText, setSearchedColumn) {
+    const columns = [
+      {
+        key: "id",
+        title: "ФИО",
+        dataIndex: "Fullname",
+        width: 200,
+        fixed: 'left',
+        ...getColumnSearchProps('Fullname', searchText, searchedColumn, searchInput, handleSearch, handleReset, setSearchText, setSearchedColumn),
+          }]
+      for(let i=1; i <= DAYOFMONTH ; i++) {
+        const newRecord = {
+            key: i,
+            title: i,
+          dataIndex: i,
+          sorter: (a, b) => a[i] - b[i],
+          sortDirections: ['ascend', 'descend'],  
+          align: "right",
+          width: 70,
+        }
+        columns.push(newRecord);
+      }
+      columns.push(
+      {
+        key: "Всего",
+        title: "Всего",
+        dataIndex: "total",
+        align: "right",
+        fixed: 'right',
+        width: 80,
+      })
+
+    return columns;
+  }
