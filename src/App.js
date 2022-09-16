@@ -10,7 +10,7 @@ import { ResizableTitle } from "./components/ResizableTitle";
 const App = () => {
   const [Data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+const [currentHight, setCurrentHight] = useState(window.innerHeight)
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
@@ -27,6 +27,20 @@ const App = () => {
       .catch((error) => {
         console.log("error", error);
       });
+  }, []);
+
+  const handleResizeHight = () => {
+    setTimeout(() => {
+      setCurrentHight(window.innerHeight);
+    }, 500);
+  };
+
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResizeHight);
+    return () => {
+      window.removeEventListener('resize', handleResizeHight);
+    };
   }, []);
 
   function  handleSearch(selectedKeys, confirm, dataIndex) {
@@ -74,8 +88,7 @@ const mergeColumns = columns.map((col, index) => ({
               pagination={{ position: ["bottomRight"] }}
               bordered={true}
               scroll={{
-                x: 1000,
-                y: 1000,
+                y: currentHight - 150,
               }}
             />
         </div>

@@ -56,6 +56,9 @@ export function createColumns(searchText, searchedColumn, searchInput, handleSea
           dataIndex: i,
           sorter: (a, b) => a[i] - b[i],
           sortDirections: ['ascend', 'descend'],  
+          render:(_, record) => (
+             <p>{getTimeFromMins(record[i])}</p>
+          ),
           align: "right",
           width: 70,
         }
@@ -66,10 +69,19 @@ export function createColumns(searchText, searchedColumn, searchInput, handleSea
         key: "Всего",
         title: "Всего",
         dataIndex: "total",
-        align: "right",
+        render:(_, record) => (
+            <p>{getTimeFromMins(record.total)}</p>
+         ),
+       align: "right",
         fixed: 'right',
-        width: 80,
+        width: 100,
       })
 
     return columns;
   }
+
+  function getTimeFromMins(mins) {
+    let hours = Math.trunc(mins/60);
+    let minutes = mins % 60;
+    return hours + ':' + String(minutes).padStart(2,'0');
+};
