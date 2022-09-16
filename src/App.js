@@ -88,7 +88,7 @@ const mergeColumns = columns.map((col, index) => ({
               pagination={{ position: ["bottomRight"] }}
               bordered={true}
               scroll={{
-                y: currentHight - 150,
+                y: currentHight - 160,
               }}
             />
         </div>

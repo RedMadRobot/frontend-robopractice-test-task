@@ -26,7 +26,6 @@ function numberOfDay(dateOfCalc) {
 
 function countOfMinutes (date, start, end) {
     const timeOfStart = new Date(date + ' ' + start.replace(/-/g,':'));
-    debugger
     const timeOfEnd = new Date(date + ' ' + end.replace(/-/g,':'));
     return (timeOfEnd-timeOfStart)/60000;
 }
@@ -43,7 +42,7 @@ export function createColumns(searchText, searchedColumn, searchInput, handleSea
     const columns = [
       {
         key: "id",
-        title: "ФИО",
+        title: "User",
         dataIndex: "Fullname",
         width: 200,
         fixed: 'left',
@@ -51,7 +50,7 @@ export function createColumns(searchText, searchedColumn, searchInput, handleSea
           }]
       for(let i=1; i <= DAYOFMONTH ; i++) {
         const newRecord = {
-            key: i,
+            key: "id",
             title: i,
           dataIndex: i,
           sorter: (a, b) => a[i] - b[i],
@@ -66,8 +65,8 @@ export function createColumns(searchText, searchedColumn, searchInput, handleSea
       }
       columns.push(
       {
-        key: "Всего",
-        title: "Всего",
+        key: "id",
+        title: "Monthly total",
         dataIndex: "total",
         render:(_, record) => (
             <p>{getTimeFromMins(record.total)}</p>
