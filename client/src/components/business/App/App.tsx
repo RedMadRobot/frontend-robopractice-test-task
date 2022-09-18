@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
+import { Wrap } from './StyledComponents';
 
 export const App = () => {
-  return <></>;
+  return <Wrap></Wrap>;
 };
