@@ -1,14 +1,13 @@
 import { Provider } from 'react-redux';
+import { App } from './app';
+import { configureStore } from '@reduxjs/toolkit';
+import reducer from './store/index.js';
 
 export default async () => {
-  
+  const store = configureStore(reducer);
   return (
     <Provider store={store}>
-      <ApiContext.Provider value={api}>
-        <I18nextProvider i18n={i18n}>
-          <App />
-        </I18nextProvider>
-      </ApiContext.Provider>
+      <App />
     </Provider>
   );
 }
