@@ -1,7 +1,8 @@
 import React from 'react';
-import type { TableProps } from './types';
-import { TableElem } from './StyledComponents';
+import { TableProps } from '@/types';
+import { TableElem, RowElem, Th } from './StyledComponents';
 import { randomId } from '@/utils';
+import { Row } from '@/components';
 
 export const Table = ({ table }: TableProps) => {
   const monthDays = [
@@ -9,18 +10,21 @@ export const Table = ({ table }: TableProps) => {
     25, 26, 27, 28, 29, 30, 31,
   ];
 
-  console.log(table[0]);
-
   return (
     <TableElem>
       <thead>
-        <tr>
-          <th>User</th>
+        <RowElem>
+          <Th>User</Th>
           {monthDays.map((day) => (
-            <th key={randomId()}>{day}</th>
+            <Th key={randomId()}>{day}</Th>
           ))}
-        </tr>
+        </RowElem>
       </thead>
+      <tbody>
+        {table.map((row) => (
+          <Row key={randomId()} row={row} />
+        ))}
+      </tbody>
     </TableElem>
   );
 };

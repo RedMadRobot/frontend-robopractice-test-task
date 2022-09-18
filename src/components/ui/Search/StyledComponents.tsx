@@ -3,6 +3,7 @@ import variables from '@/Variables.module.scss';
 
 const Form = styled.form`
   font-family: inherit;
+  margin-bottom: 30px;
 `;
 
 const Input = styled.input`
