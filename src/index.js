@@ -1,14 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import { App } from './app';
-import init from './init.jsx';
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
+import init from './init.js';
 
 const app = async () => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
