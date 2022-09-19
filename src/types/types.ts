@@ -24,4 +24,4 @@ type DayType = {
   Start: string;
 };
 
-export type { TableProps, RowProps, DayType };
+export type { TableProps, RowType, RowProps, DayType };
