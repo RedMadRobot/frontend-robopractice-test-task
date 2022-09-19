@@ -1,11 +1,12 @@
 import React from 'react';
 import { Next, Previous } from './StyledComponents';
+import { PaginationProps } from './types';
 
-export const Pagination = () => {
+export const Pagination = ({ page, onPage }: PaginationProps) => {
   return (
     <>
-      <Next aria-label="Next" />
-      <Previous aria-label="Previous" />
+      <Next onClick={() => onPage(--page)} aria-label="Next" />
+      <Previous onClick={() => onPage(++page)} aria-label="Previous" />
     </>
   );
 };

@@ -9,11 +9,16 @@ export const App = () => {
   const [table, setTable] = useState([]);
   const deferredSearch = useDeferredValue(search);
   const [limit, setLimit] = useState('25');
+  const [page, setPage] = useState(0);
 
   const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(evt.target.value);
 
   const handleLimit = (evt: any) => setLimit(evt.target.value);
+
+  const handlePage = (number: number) => setPage(number);
+
+  console.log(page);
 
   useEffect(() => {
     UserService.getStatistics().then((dataTable) => setTable(dataTable));
@@ -31,7 +36,7 @@ export const App = () => {
       <Table table={filtered} />
       <Inner>
         <Limit limit={limit} onLimit={handleLimit} />
-        <Pagination />
+        <Pagination page={page} onPage={handlePage} />
       </Inner>
     </Wrapper>
   );
