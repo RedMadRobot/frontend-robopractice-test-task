@@ -15,7 +15,8 @@ export const App = () => {
   const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(evt.target.value);
 
-  const handleLimit = (evt: any) => setLimit(evt.target.value);
+  const handleLimit = (evt: React.ChangeEvent<HTMLSelectElement>) =>
+    setLimit(evt.target.value);
 
   const handlePage = (number: number) => setPage(number);
 

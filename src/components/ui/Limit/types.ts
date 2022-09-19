@@ -1,6 +1,6 @@
 type LimitProps = {
   limit: string;
-  onLimit: (evt: any) => void;
+  onLimit: (evt: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export type { LimitProps };
