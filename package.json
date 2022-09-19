@@ -1,42 +1,57 @@
 {
-  "name": "rmr-test-task",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "node server/index.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "express": "^4.17.3"
-  }
+	"name": "rmr-test-task",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.16.4",
+		"@testing-library/react": "^12.1.4",
+		"@testing-library/user-event": "^13.5.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0",
+		"react-scripts": "5.0.0",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"start": "webpack serve --mode development",
+		"build": "webpack --mode production",
+		"build-dev": "webpack --mode development",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"server": "node server/index.js"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@types/prop-types": "^15.7.5",
+		"@types/react": "^18.0.20",
+		"@types/react-dom": "^18.0.6",
+		"awesome-typescript-loader": "^5.2.1",
+		"babel-loader": "^8.2.5",
+		"css-loader": "^6.7.1",
+		"express": "^4.17.3",
+		"sass-loader": "^13.0.2",
+		"style-loader": "^3.3.1",
+		"ts-loader": "^9.4.0",
+		"typescript": "^4.8.3",
+		"webpack": "^5.73.0",
+		"webpack-cli": "^4.10.0",
+		"webpack-dev-server": "^4.9.2",
+		"webpack-merge": "^5.8.0"
+	}
 }

@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"strict": true,
+		"outDir": "./dist/",
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"module": "commonjs",
+		"target": "es5",
+		"jsx": "react"
+	},
+	"include": [
+		"./src/**/*"
+	],
+	"exclude": [
+		"types",
+		"dist",
+		"node_modules",
+		"./plugins/**/*",
+		"./typings/**/*",
+		"./built/**/*"
+	],
+}
