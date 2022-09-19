@@ -17,4 +17,9 @@ const Item = styled.td`
   }
 `;
 
-export { RowElem, Item };
+const Resize = styled.div`
+  resize: horizontal;
+  overflow: auto;
+`;
+
+export { RowElem, Item, Resize };
