@@ -3,16 +3,16 @@ import variables from '@/Variables.module.scss';
 
 const TableElem = styled.table`
   width: 100%;
+  min-width: 1360px;
   border-collapse: collapse;
   overflow-x: auto;
-  max-width: 1800px;
 
   th:first-of-type,
   td:first-of-type {
     position: sticky;
     left: 0;
     z-index: 2;
-    background-color: aliceblue;
+    background-color: ${variables.white000};
   }
 
   th:last-of-type,
@@ -20,12 +20,12 @@ const TableElem = styled.table`
     position: sticky;
     right: 0;
     z-index: 2;
-    background-color: aliceblue;
+    background-color: ${variables.white000};
   }
 `;
 
 const Th = styled.th`
-  font-size: 14px;
+  font-size: 13px;
   width: 3%;
   color: ${variables.black000};
 

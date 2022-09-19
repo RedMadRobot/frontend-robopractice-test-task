@@ -10,9 +10,9 @@ const Item = styled.td`
   color: ${variables.black000};
   padding: 28px 0;
   width: 3%;
+  text-align: center;
 
   &:first-of-type {
-    width: 90px;
     text-align: left;
   }
 `;
