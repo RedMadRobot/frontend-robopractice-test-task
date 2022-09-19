@@ -7,7 +7,7 @@ import { RowType } from '@/types';
 export const App = () => {
   const [search, setSearch] = useState('');
   const [table, setTable] = useState([]);
-  const deferredValue = useDeferredValue(search);
+  const deferredSearch = useDeferredValue(search);
 
   const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(evt.target.value);
@@ -16,11 +16,9 @@ export const App = () => {
     UserService.getStatistics().then((dataTable) => setTable(dataTable));
   }, []);
 
-  const filtered = useMemo(() => {
-    return table.filter((element: RowType) => {
-      return element.Fullname.toLowerCase().includes(deferredValue.toLowerCase());
-    });
-  }, [deferredValue]);
+  const filtered = table.filter((element: RowType) =>
+    element.Fullname.toLowerCase().includes(deferredSearch.toLowerCase())
+  );
 
   return (
     <Wrapper>
