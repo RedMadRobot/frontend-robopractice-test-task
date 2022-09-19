@@ -21,4 +21,8 @@ const Inner = styled.div`
   margin-top: 40px;
 `;
 
-export { Wrapper, Inner };
+const Text = styled.p`
+  margin: 0;
+`;
+
+export { Wrapper, Inner, Text };
