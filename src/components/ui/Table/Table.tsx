@@ -4,6 +4,8 @@ import { TableElem, RowElem, Th } from './StyledComponents';
 import { randomId, MONTH_DAYS } from '@/utils';
 import { Row } from '@/components';
 
+import './tst.css';
+
 export const Table = memo(function TableMemo({ table }: TableProps) {
   return (
     <TableElem>
@@ -13,6 +15,7 @@ export const Table = memo(function TableMemo({ table }: TableProps) {
           {MONTH_DAYS.map((day) => (
             <Th key={randomId()}>{day}</Th>
           ))}
+          <Th></Th>
         </RowElem>
       </thead>
       <tbody>

@@ -1,11 +1,5 @@
-type DateType = {
-  Date: string;
-  End: string;
-  Start: string;
-};
-
 type RowType = {
-  Days: DateType[];
+  Days: DayType[];
   Fullname: string;
   id: number;
 };
@@ -19,9 +13,9 @@ type RowProps = {
 };
 
 type DayType = {
-  Date: string;
-  End: string;
-  Start: string;
+  Date: string | null;
+  End: string | null;
+  Start: string | null;
 };
 
 export type { TableProps, RowType, RowProps, DayType };

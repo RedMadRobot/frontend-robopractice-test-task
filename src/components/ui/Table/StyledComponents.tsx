@@ -6,15 +6,11 @@ const TableElem = styled.table`
   border-collapse: collapse;
 `;
 
-const RowElem = styled.tr`
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-`;
+const RowElem = styled.tr``;
 
 const Th = styled.th`
-  display: inline;
   font-size: 14px;
+  width: 3%;
   color: ${variables.black000};
 
   &:first-of-type {

@@ -12,6 +12,7 @@ export const Row = ({ row }: RowProps) => {
       {Days.map((day: DayType) => (
         <Item key={randomId()}>{getDifferenceTimes(day.End, day.Start)}</Item>
       ))}
+      <Item>{'test'}</Item>
     </RowElem>
   );
 };
