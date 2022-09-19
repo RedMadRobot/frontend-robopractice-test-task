@@ -9,14 +9,14 @@ export const App = () => {
   const [table, setTable] = useState([]);
   const [filterTable, setFilterTable] = useState([]);
   const deferredSearch = useDeferredValue(search);
-  const [limit, setLimit] = useState('5');
+  const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
 
   const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(evt.target.value);
 
   const handleLimit = (evt: React.ChangeEvent<HTMLSelectElement>) =>
-    setLimit(evt.target.value);
+    setLimit(Number(evt.target.value));
 
   const handlePage = (number: number) => setPage(number);
 
@@ -26,8 +26,8 @@ export const App = () => {
 
   const filtered = table.filter(
     (element: RowType, index: number) =>
-      index <= page * Number(limit) &&
-      index >= page * Number(limit) - Number(limit) &&
+      index <= page * limit &&
+      index >= page * limit - limit &&
       element.Fullname.toLowerCase().includes(deferredSearch.toLowerCase())
   );
 
@@ -39,9 +39,7 @@ export const App = () => {
       <Table table={filterTable} />
       <Inner>
         <Limit limit={limit} onLimit={handleLimit} />
-        <Text>{`${page * Number(limit) - Number(limit)}-${page * Number(limit)} of ${
-          table.length
-        }`}</Text>
+        <Text>{`${page * limit - limit}-${page * limit} of ${table.length}`}</Text>
         <Pagination page={page} onPage={handlePage} />
       </Inner>
     </Wrapper>

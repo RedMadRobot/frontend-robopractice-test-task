@@ -1,5 +1,5 @@
 type LimitProps = {
-  limit: string;
+  limit: number;
   onLimit: (evt: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
