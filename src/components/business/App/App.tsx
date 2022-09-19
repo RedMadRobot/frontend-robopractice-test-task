@@ -39,7 +39,9 @@ export const App = () => {
       <Table table={filterTable} />
       <Inner>
         <Limit limit={limit} onLimit={handleLimit} />
-        <Text>{`1-${page * Number(limit)} of ${table.length}`}</Text>
+        <Text>{`${page * Number(limit) - Number(limit)}-${page * Number(limit)} of ${
+          table.length
+        }`}</Text>
         <Pagination page={page} onPage={handlePage} />
       </Inner>
     </Wrapper>
