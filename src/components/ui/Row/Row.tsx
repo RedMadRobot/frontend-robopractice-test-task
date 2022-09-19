@@ -1,6 +1,6 @@
 import React from 'react';
 import { RowProps, DayType } from '@/types';
-import { randomId, getDifferenceTimes } from '@/utils';
+import { randomId, getDifferenceTimes, getCountTimes } from '@/utils';
 import { RowElem, Item } from './StyledComponents';
 
 export const Row = ({ row }: RowProps) => {
@@ -10,9 +10,11 @@ export const Row = ({ row }: RowProps) => {
     <RowElem>
       <Item>{Fullname}</Item>
       {Days.map((day: DayType) => (
-        <Item key={randomId()}>{getDifferenceTimes(day.End, day.Start)}</Item>
+        <Item key={randomId()}>
+          {getDifferenceTimes(day.End as string, day.Start as string)}
+        </Item>
       ))}
-      <Item>{'test'}</Item>
+      <Item>{getCountTimes(Days)}</Item>
     </RowElem>
   );
 };
