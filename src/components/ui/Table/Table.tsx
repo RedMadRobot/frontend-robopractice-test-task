@@ -15,7 +15,7 @@ export const Table = memo(function TableMemo({ table }: TableProps) {
           {MONTH_DAYS.map((day) => (
             <Th key={randomId()}>{day}</Th>
           ))}
-          <Th></Th>
+          <Th>Monthly total</Th>
         </RowElem>
       </thead>
       <tbody>
