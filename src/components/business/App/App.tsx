@@ -31,7 +31,7 @@ export const App = () => {
       element.Fullname.toLowerCase().includes(deferredSearch.toLowerCase())
   );
 
-  useEffect(() => setFilterTable(filtered), [table, page, limit]);
+  useEffect(() => setFilterTable(filtered), [table, page, limit, deferredSearch]);
 
   return (
     <Wrapper>
