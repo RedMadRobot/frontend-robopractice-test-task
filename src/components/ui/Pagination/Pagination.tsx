@@ -1,5 +1,11 @@
 import React from 'react';
+import { Next, Previous } from './StyledComponents';
 
 export const Pagination = () => {
-  return <></>;
+  return (
+    <>
+      <Next aria-label="Next" />
+      <Previous aria-label="Previous" />
+    </>
+  );
 };

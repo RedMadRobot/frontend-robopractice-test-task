@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-const Form = styled.form`
-  margin-top: 40px;
+const Select = styled.select`
+  cursor: pointer;
+  transition: 0.3s opacity;
+
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
-export { Form };
+export { Select };

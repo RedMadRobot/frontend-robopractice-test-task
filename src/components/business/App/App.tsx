@@ -1,5 +1,5 @@
 import React, { useDeferredValue, useEffect, useState } from 'react';
-import { Wrapper } from './StyledComponents';
+import { Wrapper, Inner } from './StyledComponents';
 import { Search, Table, Pagination, Limit } from '@/components';
 import { UserService } from '@/service';
 import { RowType } from '@/types';
@@ -15,8 +15,6 @@ export const App = () => {
 
   const handleLimit = (evt: any) => setLimit(evt.target.value);
 
-  console.log(limit);
-
   useEffect(() => {
     UserService.getStatistics().then((dataTable) => setTable(dataTable));
   }, []);
@@ -31,8 +29,10 @@ export const App = () => {
     <Wrapper>
       <Search search={search} onSearch={handleSearch} />
       <Table table={filtered} />
-      <Limit limit={limit} onLimit={handleLimit} />
-      <Pagination />
+      <Inner>
+        <Limit limit={limit} onLimit={handleLimit} />
+        <Pagination />
+      </Inner>
     </Wrapper>
   );
 };

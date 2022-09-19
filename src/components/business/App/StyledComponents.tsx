@@ -13,4 +13,12 @@ const Wrapper = styled.div`
   margin: 40px 0;
 `;
 
-export { Wrapper };
+const Inner = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+`;
+
+export { Wrapper, Inner };
