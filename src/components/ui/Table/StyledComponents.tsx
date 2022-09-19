@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import variables from '@/Variables.module.scss';
 
 const TableElem = styled.table`
-  width: 100%;
+  box-sizing: border-box;
   min-width: 1360px;
   border-collapse: collapse;
   overflow-x: auto;
@@ -30,7 +30,6 @@ const Th = styled.th`
   color: ${variables.black000};
 
   &:first-of-type {
-    width: 90px;
     text-align: left;
   }
 `;

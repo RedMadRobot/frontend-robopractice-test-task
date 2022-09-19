@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   min-height: 100vh;
-  margin: 60px 40px;
+  margin: 40px 0;
 `;
 
 export { Wrapper };
