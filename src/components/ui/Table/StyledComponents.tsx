@@ -4,9 +4,25 @@ import variables from '@/Variables.module.scss';
 const TableElem = styled.table`
   width: 100%;
   border-collapse: collapse;
-`;
+  overflow-x: auto;
+  max-width: 1800px;
 
-const RowElem = styled.tr``;
+  th:first-of-type,
+  td:first-of-type {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: aliceblue;
+  }
+
+  th:last-of-type,
+  td:last-of-type {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+    background-color: aliceblue;
+  }
+`;
 
 const Th = styled.th`
   font-size: 14px;
@@ -19,4 +35,4 @@ const Th = styled.th`
   }
 `;
 
-export { TableElem, RowElem, Th };
+export { TableElem, Th };

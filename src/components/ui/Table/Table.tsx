@@ -1,22 +1,20 @@
 import React, { memo } from 'react';
 import { TableProps } from '@/types';
-import { TableElem, RowElem, Th } from './StyledComponents';
+import { TableElem, Th } from './StyledComponents';
 import { randomId, MONTH_DAYS } from '@/utils';
 import { Row } from '@/components';
-
-import './tst.css';
 
 export const Table = memo(function TableMemo({ table }: TableProps) {
   return (
     <TableElem>
       <thead>
-        <RowElem>
+        <tr>
           <Th>User</Th>
           {MONTH_DAYS.map((day) => (
             <Th key={randomId()}>{day}</Th>
           ))}
           <Th>Monthly total</Th>
-        </RowElem>
+        </tr>
       </thead>
       <tbody>
         {table.map((row) => (
