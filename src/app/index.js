@@ -1,10 +1,9 @@
-import UsersTable from "../components/Table/Table"
+import UsersTable from '../components/UsersTable/UsersTable';
 
 export const App = () => {
-    return (
+  return (
     <>
-        Hello
-        {/* <UsersTable></UsersTable> */}
+      <UsersTable></UsersTable>
     </>
-    );
-}
+  );
+};
