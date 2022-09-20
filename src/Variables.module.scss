@@ -1,0 +1,11 @@
+$fontFamily: 'Inter', 'Arial', sans-serif;
+$black000: #363636;
+$black100: #949494;
+$white000: #fff;
+
+:export {
+  fontFamily: $fontFamily;
+  black000: $black000;
+  black100: $black100;
+  white000: $white000;
+}
