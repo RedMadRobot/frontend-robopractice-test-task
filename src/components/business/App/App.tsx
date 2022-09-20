@@ -2,7 +2,7 @@ import React, { useDeferredValue, useEffect, useState } from 'react';
 import { Wrapper, Inner, Text } from './StyledComponents';
 import { Search, Table, Pagination, Limit } from '@/components';
 import { UserService } from '@/service';
-import { RowType } from '@/types';
+import { filteredData } from '@/utils';
 
 export const App = () => {
   const [search, setSearch] = useState('');
@@ -26,16 +26,12 @@ export const App = () => {
     UserService.getStatistics().then((dataTable) => setTable(dataTable));
   }, []);
 
-  const filtered = table.filter(
-    (element: RowType, index: number) =>
-      index <= page * limit &&
-      index >= page * limit - limit &&
-      element.Fullname.toLowerCase().includes(deferredSearch.toLowerCase())
-  );
-
   useEffect(() => setCountPage(Math.ceil(table.length / limit)), [table, limit]);
 
-  useEffect(() => setFilterTable(filtered), [table, page, limit, deferredSearch]);
+  useEffect(
+    () => setFilterTable(filteredData({ table, page, limit, deferredSearch })),
+    [table, page, limit, deferredSearch]
+  );
 
   return (
     <Wrapper>
