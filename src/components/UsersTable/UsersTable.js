@@ -1,40 +1,50 @@
-import { useState } from 'react';
+
 import { Table } from 'antd';
 import Data from '../Data';
-import { Api } from '../Api/Api';
 
+import dayjs from 'dayjs';
+import { ColumnGenerator } from '../ColumnGenerator';
+import { daysInMonth } from './utils/constants';
 
-
-const columns = [
-  {
-    title: 'User',
-    dataIndex: 'Fullname',
-    key: 'id',
-  },
-  {
-    title: '1',
-    dataIndex: '',
-    key: '1',
-  },
-  {
-    title: '2',
-    dataIndex: '',
-    key: '2',
-  },
-  {
-    title: 'Monthly total',
-    dataIndex: '',
-    key: '3',
-  },
-];
+// const columns = [
+//   {
+//     title: 'User',
+//     dataIndex: 'Fullname',
+//     key: 'id',
+//     fixed: 'left',
+//     width: 200,
+//     render: (fullname) => fullname,
+//     sorter: (a, b) => a.Fullname.localeCompare(b.Fullname),
+//   },
+//   {
+//     title: '1',
+//     dataIndex: '',
+//     key: '',
+//   },
+//   {
+//     title: '2',
+//     dataIndex: '',
+//     key: '2',
+//   },
+//   {
+//     title: 'Monthly total',
+//     dataIndex: '',
+//     key: '3',
+//     align: 'right',
+//     fixed: 'right',
+//     width: 200,
+//   },
+// ];
 
 export default function UsersTable() {
-
-  const [users, setUsers] = useState([]);
-
-  Api()
-    .then((users) => setUsers(users))
-    .catch((err) => console.log(err));
   
-  return <Table dataSource={users} columns={columns} />;
+
+  return (
+    <Table
+      dataSource={Data()}
+      columns={ColumnGenerator()}
+      scroll={{ x: 'max-content' }}
+      bordered
+    />
+  );
 }
