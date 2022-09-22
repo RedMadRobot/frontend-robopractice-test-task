@@ -1,3 +1,20 @@
+import UsersTable from '../components/UsersTable/UsersTable';
+import { useEffect, useState } from 'react';
+import Api from '../components/Api/Api';
+import HandledUsersData from '../components/HandledUsersData';
+
 export const App = () => {
-    return <h1>Hello</h1>
-}
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    Api()
+      .then((res) => setData(res))
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <>
+      <UsersTable dataSourse={HandledUsersData(data)}></UsersTable>
+    </>
+  );
+};
