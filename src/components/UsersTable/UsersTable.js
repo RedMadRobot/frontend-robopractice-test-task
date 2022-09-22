@@ -1,50 +1,73 @@
-
-import { Table } from 'antd';
-import Data from '../Data';
-
-import dayjs from 'dayjs';
+import { Resizable } from 'react-resizable';
+import { Table, Input, Typography } from 'antd';
 import { ColumnGenerator } from '../ColumnGenerator';
-import { daysInMonth } from './utils/constants';
+import './UsersTable.css';
+const { Text } = Typography;
 
-// const columns = [
-//   {
-//     title: 'User',
-//     dataIndex: 'Fullname',
-//     key: 'id',
-//     fixed: 'left',
-//     width: 200,
-//     render: (fullname) => fullname,
-//     sorter: (a, b) => a.Fullname.localeCompare(b.Fullname),
-//   },
-//   {
-//     title: '1',
-//     dataIndex: '',
-//     key: '',
-//   },
-//   {
-//     title: '2',
-//     dataIndex: '',
-//     key: '2',
-//   },
-//   {
-//     title: 'Monthly total',
-//     dataIndex: '',
-//     key: '3',
-//     align: 'right',
-//     fixed: 'right',
-//     width: 200,
-//   },
-// ];
+export default function UsersTable(props) {
+  const ResizableTitle = (props) => {
+    const { onResize, width, ...restProps } = props;
 
-export default function UsersTable() {
-  
+    if (!width) {
+      return <th {...restProps} />;
+    }
+
+    return (
+      <Resizable
+        width={width}
+        height={0}
+        handle={
+          <span
+            className='react-resizable-handle'
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          />
+        }
+        onResize={onResize}
+        draggableOpts={{
+          enableUserSelectHack: false,
+        }}
+      >
+        <th {...restProps} />
+      </Resizable>
+    );
+  };
+
+
 
   return (
-    <Table
-      dataSource={Data()}
-      columns={ColumnGenerator()}
-      scroll={{ x: 'max-content' }}
-      bordered
-    />
+    <>
+      <Input
+        className='userTable__input'
+        type={'text'}
+        placeholder={'Search'}
+        // onChange={filterList}
+      />
+
+      <Table
+        dataSource={props.dataSourse}
+        columns={ColumnGenerator()}
+        scroll={{ x: 'max-content' }}
+        bordered
+        //     summary={(pageData) => {
+        //     let totalTimes = 0;
+        //     pageData.forEach(({ day }) => {
+        //       totalTimes += day;
+        //     })
+        //     return (
+        //       <>
+        //       <Table.Summary.Column>
+        //           <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
+        //           <Table.Summary.Cell index={1}>
+        //             <Text type="danger">{totalTimes}</Text>
+        //           </Table.Summary.Cell>
+        //         </Table.Summary.Column>
+        //       </>
+        //     )
+        //   }
+        // }
+      />
+    </>
   );
 }

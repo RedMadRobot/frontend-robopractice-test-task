@@ -1,6 +1,7 @@
 import UsersTable from '../components/UsersTable/UsersTable';
 import { useEffect, useState } from 'react';
 import Api from '../components/Api/Api';
+import HandledUsersData from '../components/HandledUsersData';
 
 export const App = () => {
 
@@ -13,7 +14,7 @@ export const App = () => {
 
   return (
     <>
-      <UsersTable></UsersTable>
+      <UsersTable dataSourse={HandledUsersData(data)}></UsersTable>
     </>
   );
 };
