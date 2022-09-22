@@ -6,9 +6,13 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^4.23.2",
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.0",
+    "resizable-antd-table": "^1.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
