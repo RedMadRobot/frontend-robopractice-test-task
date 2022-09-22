@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+header {
+  input {
+    border: 1px solid black;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 250px;
+    height: 30px;
+    margin: 10px 0px 0px 20px;
+    font-size: 16px;
+    padding-left: 10px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+table {
+  margin-top: 30px;
+
+  th,
+  td {
+    border: 1px solid rgb(204, 197, 197);
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-collapse: collapse;
+    padding: 10px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  // Первая колонка приклеена
+  td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: white;
+  }
+
+  th:first-child {
+    position: sticky;
+    left: 0;
+    background-color: white;
+  }
+
+  // Последняя колонка приклеена
+  td:last-child {
+    position: sticky;
+    right: 0;
+    background-color: white;
+  }
+
+  th:last-child {
+    position: sticky;
+    right: 0;
+    background-color: white;
+  }
+
+  // resize ячеек
+  .td-resize {
+    resize: both;
+    overflow: auto;
+    min-width: 150px;
+
+    &::-webkit-resizer {
+      background: orange;
+    }
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  margin: auto 0px 10px 20px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    margin: 10px 10px 0px 0px;
+  }
+
+  span {
+    width: 100px;
+    margin: 0px 20px;
+  }
+
+  select {
+    border: none;
+    outline: 0px;
+  }
+
+  button {
+    margin-right: 20px;
+    padding: 10px;
+    width: 50px;
+    border: none;
+    background: none;
+  }
+}
+
+.spinner {
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 20px auto;
+}
