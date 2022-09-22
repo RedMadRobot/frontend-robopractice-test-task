@@ -1,3 +1,6 @@
+import React from "react";
+import Tracker from "../components/Tracker";
+
 export const App = () => {
-    return <h1>Hello</h1>
-}
+  return <Tracker />;
+};
