@@ -1,63 +1,104 @@
-import React, { useEffect } from 'react';
-import { getUsers } from '../../selectors.js';
-import { useSelector } from 'react-redux';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  TableColumnResizing,
+  PagingPanel,
+  SearchPanel,
+  Toolbar,
+  TableFixedColumns,
+  TableSelection,
+} from '@devexpress/dx-react-grid-material-ui';
+import {
+  PagingState,
+  IntegratedPaging,
+  SearchState,
+  IntegratedFiltering,
+  IntegratedSorting,
+  SortingState,
+  TableColumnVisibility,
+} from '@devexpress/dx-react-grid';
+import { useSelector } from 'react-redux';
+import { getUsers, getUI } from '../../selectors.js';
 
 const BasicTable = () => {
   const users = useSelector(getUsers);
-  useEffect(() => {
+  const uiSettings = useSelector(getUI);
+  const maxNumberDays = uiSettings.maxNumberDays;
+  const arrColumns = [
+    { name: 'id', title: 'id' },
+    { name: 'fullName', title: 'User' },
+  ];
+  const columnWidth = [
+    { columnName: 'id', width: 180 },
+    { columnName: 'fullName', width: 180 },
+    { columnName: 'monthly', width: 180 },
+    ];
+  const countDayInMonth = 30;
+  for (let i = 0; i <= countDayInMonth; i += 1 ) {
+    const columnDay = {
+      name: `day${i}`,
+      title: `${i + 1}`,
+    };
+    arrColumns.push(columnDay);
+    columnWidth.push({columnName: `day${i}`, width: 100});
+  } 
 
-  }, []);
+
+    const [columns] = useState(arrColumns);
+    const [defaultColumnWidths] = useState(columnWidth);
+   arrColumns.push({ name: 'monthly', title: 'Monthly' });
+
+  const rows = users.map((user) => {
+    const {id, fullName, monthly, fullMonth} = user;
+    const days = {};
+    fullMonth.forEach((day,i)=>(days[`day${i}`] = day));
+    return  ({id, fullName, monthly, ...days});
+  });
+  const [tableColumnExtensions] = useState([
+    { columnName: 'fullName', width: 150 },
+  ]);
+  const [leftColumns] = useState([TableSelection.COLUMN_TYPE, 'fullName']);
+  const [rightColumns] = useState(['monthly']);
+
+  const [searchValue, setSearchState] = useState('');
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>User</TableCell>
-            {/* <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
-            <TableCell>Monthly total</TableCell>
-          </TableRow>
-        </TableHead>
-        {/* <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody> */}
-      </Table>
-    </TableContainer>
+    <Paper>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <PagingState
+          defaultCurrentPage={0}
+          pageSize={10}
+        />
+        <SearchState
+          value={searchValue}
+          onValueChange={setSearchState}
+        />
+        <SortingState
+          defaultSorting={[{ columnName: 'fullName', direction: 'asc' }]}
+        />
+         <IntegratedSorting />
+        <IntegratedFiltering />
+        <IntegratedPaging />
+
+        <Table columnExtensions={tableColumnExtensions} />
+        <TableColumnVisibility hiddenColumnNames={['id']}/>
+        <TableColumnResizing defaultColumnWidths={defaultColumnWidths} />
+        <TableHeaderRow showSortingControls/>
+        <Toolbar />
+        <SearchPanel />
+        <PagingPanel />
+        <TableFixedColumns
+          leftColumns={leftColumns}
+          rightColumns={rightColumns}
+        />
+      </Grid>
+    </Paper>
   );
-}
+};
 
 export default BasicTable;

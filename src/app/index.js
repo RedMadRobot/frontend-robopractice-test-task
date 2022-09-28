@@ -1,8 +1,9 @@
-import BasicTable from './table';
+import BasicTable from './table/index.js';
 import React, { useEffect } from 'react';
 import getUsers from '../api/getUsers.js';
 import { useDispatch } from 'react-redux';
 import { addUsers } from '../store/usersSlice.js';
+import { setMaxNumberDays } from '../store/uiSlice.js';
 
 const getMaxDayMonth = (date) => {
     const [year, month] = date.split('-');
@@ -10,15 +11,16 @@ const getMaxDayMonth = (date) => {
     return lastDayOfMonth.getDate();
 };
 
-const getFormattedUsers = (usersAndDays) => {
-
+const getFormatUsersAndMaxNumberDays = (usersAndDays) => {
+    let maxNumberDays = null;
     const users = usersAndDays.map(({id, Fullname, Days}) => {
-        let totalHours = 0;
+        let monthly = 0;
         let fullMonth = null;
         Days.forEach(({Date, Start, End}) => {
             const [day] = Date.split('-').reverse();
             if (!fullMonth) {
-                fullMonth = new Array(getMaxDayMonth(Date));
+                maxNumberDays = getMaxDayMonth(Date);
+                fullMonth = new Array(maxNumberDays);
                 fullMonth.fill(0);
             }
 
@@ -35,19 +37,23 @@ const getFormattedUsers = (usersAndDays) => {
             }
             
             const hours = Number(`${diffHours}.${diffMinutes}`);
-            totalHours += hours;
+            monthly += hours;
             fullMonth[numberDay - 1] = hours;
         });
-
-        return {id, fullName: Fullname, fullMonth, totalHours};
+        const roundedMonthly = Math.round(monthly * 100)/100;
+        return {id, fullName: Fullname, fullMonth, monthly: roundedMonthly};
     });
-    return users;
+    return {users, maxNumberDays};
 };
+
 const loadUsers = async (dispatch) => {
     const usersAndDays = await getUsers();
-    const users = getFormattedUsers(usersAndDays);
+    const {users, maxNumberDays} = getFormatUsersAndMaxNumberDays(usersAndDays);
+    //console.log(users.filter((user)=>Number(user.id)===71));
     dispatch(addUsers(users));
+    dispatch(setMaxNumberDays(maxNumberDays));
 };
+
 export const App = () => {
     const dispatch = useDispatch();
     useEffect(() => {
